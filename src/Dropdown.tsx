@@ -5,13 +5,14 @@ import ChevronUp from "./assets/chevron-up-solid.svg";
 
 interface Props {
   items: string[];
+  itemType: string;
   multiSelect: boolean;
 }
 
-export function Dropdown({ items, multiSelect = false }: Props) {
-  let itemsx = [...items];
+export function Dropdown({ items, itemType, multiSelect = false }: Props) {
+  let copiedItems = [...items];
   if (multiSelect) {
-    itemsx = ["All", "None", ...items];
+    copiedItems = ["All", "None", ...items];
   }
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItems, setSelectItems] = useState<string[]>([]);
@@ -44,13 +45,15 @@ export function Dropdown({ items, multiSelect = false }: Props) {
       <div className="dropdownWrapper">
         <button className="dropdown" onClick={() => setIsOpen(!isOpen)}>
           <div className="dropdownText">
-            {selectedItems.length > 0 ? selectedItems.join(", ") : "Select"}
+            {selectedItems.length > 0
+              ? selectedItems.join(", ")
+              : "Select " + itemType}
           </div>
           {!isOpen ? <img src={ChevronDown} /> : <img src={ChevronUp} />}
         </button>
-        {isOpen && itemsx != null && (
+        {isOpen && copiedItems != null && (
           <div className="itemsWrapper">
-            {itemsx.map((item) => (
+            {copiedItems.map((item) => (
               <div
                 key={item}
                 className={selectedItems.includes(item) ? "selected" : "item"}
@@ -64,7 +67,12 @@ export function Dropdown({ items, multiSelect = false }: Props) {
                       id={`input-${item}`}
                       type="checkbox"
                     />
-                    <label htmlFor={`input-${item}`}>{item}</label>
+                    <label
+                      style={{ paddingLeft: "10px" }}
+                      htmlFor={`input-${item}`}
+                    >
+                      {item}
+                    </label>
                   </>
                 ) : (
                   <div>{item}</div>

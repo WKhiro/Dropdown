@@ -1,13 +1,17 @@
 import "./App.css";
 import { fruits } from "./fruits";
+import { pokemon } from "./pokemon";
 import { Dropdown } from "./Dropdown";
 
 function App() {
   return (
-    <div className="container">
-      <Dropdown items={fruits} multiSelect={false} />
-      <Dropdown items={fruits} multiSelect={true} />
-    </div>
+    <>
+      <h1>DROPDOWNS</h1>
+      <div className="container">
+        <Dropdown items={fruits} itemType={"Fruit"} multiSelect={true} />
+        <Dropdown items={pokemon} itemType={"Pokemon"} multiSelect={false} />
+      </div>
+    </>
   );
 }
 
