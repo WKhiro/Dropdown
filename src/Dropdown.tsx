@@ -51,7 +51,7 @@ export function Dropdown({ items, itemType, multiSelect = false }: Props) {
           </div>
           {!isOpen ? <img src={ChevronDown} /> : <img src={ChevronUp} />}
         </button>
-        {isOpen && copiedItems != null && (
+        {isOpen && (
           <div className="itemsWrapper">
             {copiedItems.map((item) => (
               <div
@@ -75,7 +75,7 @@ export function Dropdown({ items, itemType, multiSelect = false }: Props) {
                     </label>
                   </>
                 ) : (
-                  <div>{item}</div>
+                  <label>{item}</label>
                 )}
               </div>
             ))}
